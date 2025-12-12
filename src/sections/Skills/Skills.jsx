@@ -1,59 +1,90 @@
-import './Skills.css';
+import { Code, Database, Palette, Wrench } from 'lucide-react';
+import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 
 const Skills = () => {
     const skillCategories = [
-        {
-            category: 'Frontend',
-            icon: '🎨',
-            skills: ['React', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Next.js', 'Vue.js'],
-        },
-        {
-            category: 'Backend',
-            icon: '⚙️',
-            skills: ['Node.js', 'Express', 'Python', 'Django', 'REST API', 'GraphQL', 'PostgreSQL', 'MongoDB'],
-        },
-        {
-            category: 'Tools & Others',
-            icon: '🛠️',
-            skills: ['Git', 'Docker', 'AWS', 'Firebase', 'Webpack', 'Vite', 'Jest', 'Figma'],
-        },
+        { title: 'Frontend', icon: Palette, skills: ['React', 'Vite', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'] },
+        { title: 'Backend & Mobile', icon: Code, skills: ['PHP', 'Laravel', 'Java', 'Kotlin', 'Python', 'Node.js', 'Blade/Breeze', 'REST API'] },
+        { title: 'Database & Cloud', icon: Database, skills: ['MySQL', 'SQLite', 'Oracle Apex', 'Oracle Cloud', 'Linux (Ubuntu)'] },
+        { title: 'Tools & Design', icon: Wrench, skills: ['VS Code', 'NetBeans', 'Android Studio', 'Postman', 'Figma', 'Canva', 'Photoshop', 'Signavio'] }
     ];
 
     return (
-        <section id="skills" className="skills">
-            <div className="container">
-                <div className="section-header">
-                    <h2>Skills & Technologies</h2>
-                    <p className="section-subtitle">Tools I work with</p>
-                </div>
-
-                <div className="skills-grid">
-                    {skillCategories.map((category, index) => (
-                        <div key={index} className="skill-category">
-                            <div className="category-header">
-                                <span className="category-icon">{category.icon}</span>
-                                <h3>{category.category}</h3>
+        <section id="skills" className="min-h-screen flex items-center py-20" style={{ background: 'var(--bg-section-1)' }}>
+            <div className="w-full max-w-6xl mx-auto px-6">
+                <div className="grid lg:grid-cols-12 gap-12 items-start">
+                    {/* Left - Header */}
+                    <ScrollReveal animation="fade-right" className="lg:col-span-4 lg:sticky lg:top-24">
+                        <div>
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
+                                <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-primary)' }}>
+                                    Expertise
+                                </span>
                             </div>
+                            
+                            <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight"
+                                style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
+                                Skills &
+                                <span className="block" style={{ 
+                                    background: 'var(--gradient-primary)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent'
+                                }}>
+                                    Technologies
+                                </span>
+                            </h2>
 
-                            <div className="skills-list">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <div key={skillIndex} className="skill-item">
-                                        <span className="skill-name">{skill}</span>
-                                    </div>
-                                ))}
+                            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                                I'm constantly learning and expanding my skillset to stay current with the latest technologies.
+                            </p>
+
+                            {/* Total Skills */}
+                            <div className="mt-8 p-6 rounded-2xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                <div className="text-5xl font-black" style={{ 
+                                    background: 'var(--gradient-primary)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent'
+                                }}>
+                                    24+
+                                </div>
+                                <div className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Technologies Mastered</div>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </ScrollReveal>
 
-                <div className="skills-extra">
-                    <div className="extra-card">
-                        <h4>💡 Always Learning</h4>
-                        <p>Constantly exploring new technologies and best practices to stay ahead in the ever-evolving web development landscape.</p>
-                    </div>
-                    <div className="extra-card">
-                        <h4>🤝 Collaboration</h4>
-                        <p>Experienced in working with cross-functional teams, using tools like Git, Jira, and Slack for seamless collaboration.</p>
+                    {/* Right - Skills Grid */}
+                    <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
+                        {skillCategories.map((category, index) => {
+                            const Icon = category.icon;
+                            return (
+                                <ScrollReveal key={index} animation="fade-up" delay={index + 1}>
+                                    <div className="p-6 rounded-2xl h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
+                                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                        
+                                        <div className="flex items-center gap-4 mb-5">
+                                            <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
+                                                style={{ background: 'var(--gradient-primary)' }}>
+                                                <Icon size={24} className="text-white" />
+                                            </div>
+                                            <h3 className="text-xl font-bold" style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
+                                                {category.title}
+                                            </h3>
+                                        </div>
+                                        
+                                        <div className="flex flex-wrap gap-2">
+                                            {category.skills.map((skill, i) => (
+                                                <span key={i} 
+                                                    className="px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105"
+                                                    style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}>
+                                                    {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
