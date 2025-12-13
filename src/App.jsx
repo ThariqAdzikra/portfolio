@@ -8,10 +8,14 @@ import Projects from './sections/Projects/Projects';
 import Certificates from './sections/Certificates/Certificates';
 import SocialMedia from './sections/SocialMedia/SocialMedia';
 import Contact from './sections/Contact/Contact';
+import CustomCursor from './components/CustomCursor/CustomCursor';
+import RippleEffect from './components/RippleEffect/RippleEffect';
 
 function App() {
   return (
     <div className="min-h-screen relative">
+      <CustomCursor />
+      <RippleEffect />
       {/* Global Animated Background */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Large Floating Orbs */}

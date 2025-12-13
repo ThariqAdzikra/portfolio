@@ -1,12 +1,15 @@
 import { Code, Database, Palette, Wrench } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Skills = () => {
+    const { t } = useLanguage();
+
     const skillCategories = [
-        { title: 'Frontend', icon: Palette, skills: ['React', 'Vite', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'] },
-        { title: 'Backend & Mobile', icon: Code, skills: ['PHP', 'Laravel', 'Java', 'Kotlin', 'Python', 'Node.js', 'Blade/Breeze', 'REST API'] },
-        { title: 'Database & Cloud', icon: Database, skills: ['MySQL', 'SQLite', 'Oracle Apex', 'Oracle Cloud', 'Linux (Ubuntu)'] },
-        { title: 'Tools & Design', icon: Wrench, skills: ['VS Code', 'NetBeans', 'Android Studio', 'Postman', 'Figma', 'Canva', 'Photoshop', 'Signavio'] }
+        { title: t.skills.categories.frontend, icon: Palette, skills: ['React', 'Vite', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap'] },
+        { title: t.skills.categories.backend, icon: Code, skills: ['PHP', 'Laravel', 'Java', 'Kotlin', 'Python', 'Node.js', 'Blade/Breeze', 'REST API'] },
+        { title: t.skills.categories.database, icon: Database, skills: ['MySQL', 'SQLite', 'Oracle Apex', 'Oracle Cloud', 'Linux (Ubuntu)'] },
+        { title: t.skills.categories.tools, icon: Wrench, skills: ['VS Code', 'NetBeans', 'Android Studio', 'Postman', 'Figma', 'Canva', 'Photoshop', 'Signavio'] }
     ];
 
     return (
@@ -19,24 +22,24 @@ const Skills = () => {
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                                 <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-primary)' }}>
-                                    Expertise
+                                    {t.skills.label}
                                 </span>
                             </div>
                             
                             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight"
                                 style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
-                                Skills &
+                                {t.skills.title}
                                 <span className="block" style={{ 
                                     background: 'var(--gradient-primary)',
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent'
                                 }}>
-                                    Technologies
+                                    {t.skills.titleHighlight}
                                 </span>
                             </h2>
 
                             <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                I'm constantly learning and expanding my skillset to stay current with the latest technologies.
+                                {t.skills.description}
                             </p>
 
                             {/* Total Skills */}
@@ -48,7 +51,7 @@ const Skills = () => {
                                 }}>
                                     24+
                                 </div>
-                                <div className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Technologies Mastered</div>
+                                <div className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t.skills.techMastered}</div>
                             </div>
                         </div>
                     </ScrollReveal>

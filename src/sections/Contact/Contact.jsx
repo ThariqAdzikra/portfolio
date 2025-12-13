@@ -1,11 +1,14 @@
 import { Mail, MapPin, Send, Clock } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Contact = () => {
+    const { t } = useLanguage();
+
     const contactInfo = [
-        { icon: Mail, label: 'Email', value: 'your.email@example.com', link: 'mailto:your.email@example.com' },
-        { icon: MapPin, label: 'Location', value: 'Indonesia', link: null },
-        { icon: Clock, label: 'Timezone', value: 'GMT+7 (WIB)', link: null },
+        { icon: Mail, label: t.contact.info.email, value: 'your.email@example.com', link: 'mailto:your.email@example.com' },
+        { icon: MapPin, label: t.contact.info.location, value: 'Indonesia', link: null },
+        { icon: Clock, label: t.contact.info.timezone, value: 'GMT+7 (WIB)', link: null },
     ];
 
     return (
@@ -17,17 +20,17 @@ const Contact = () => {
                         <div className="flex items-center justify-center gap-3 mb-6">
                             <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                             <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-primary)' }}>
-                                Get In Touch
+                                {t.contact.label}
                             </span>
                             <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                         </div>
                         <h2 className="text-4xl md:text-5xl font-black mb-4"
                             style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
-                            Let's Work{' '}
-                            <span style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Together</span>
+                            {t.contact.title}{' '}
+                            <span style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t.contact.titleHighlight}</span>
                         </h2>
                         <p className="text-lg max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                            Have a project in mind? I'd love to hear from you!
+                            {t.contact.subtitle}
                         </p>
                     </div>
                 </ScrollReveal>
@@ -62,10 +65,10 @@ const Contact = () => {
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: 'var(--accent-secondary)' }}></span>
                                         <span className="relative inline-flex rounded-full h-3 w-3" style={{ background: 'var(--accent-secondary)' }}></span>
                                     </span>
-                                    <span className="font-bold" style={{ color: 'var(--accent-secondary)' }}>Currently Available</span>
+                                    <span className="font-bold" style={{ color: 'var(--accent-secondary)' }}>{t.contact.available.title}</span>
                                 </div>
                                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                                    I'm open for freelance projects and full-time opportunities.
+                                    {t.contact.available.subtitle}
                                 </p>
                             </div>
                         </div>
@@ -76,29 +79,29 @@ const Contact = () => {
                         <form className="p-8 rounded-3xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                             <div className="grid sm:grid-cols-2 gap-5 mb-5">
                                 <div>
-                                    <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Name</label>
-                                    <input type="text" placeholder="John Doe" 
+                                    <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.name}</label>
+                                    <input type="text" placeholder={t.contact.form.namePlaceholder} 
                                         className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
                                         style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', '--tw-ring-color': 'var(--accent-primary)' }} />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Email</label>
-                                    <input type="email" placeholder="john@example.com" 
+                                    <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.email}</label>
+                                    <input type="email" placeholder={t.contact.form.emailPlaceholder} 
                                         className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
                                         style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} />
                                 </div>
                             </div>
 
                             <div className="mb-5">
-                                <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Subject</label>
-                                <input type="text" placeholder="Project inquiry" 
+                                <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.subject}</label>
+                                <input type="text" placeholder={t.contact.form.subjectPlaceholder} 
                                     className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
                                     style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} />
                             </div>
 
                             <div className="mb-6">
-                                <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Message</label>
-                                <textarea rows="5" placeholder="Tell me about your project..." 
+                                <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.message}</label>
+                                <textarea rows="5" placeholder={t.contact.form.messagePlaceholder} 
                                     className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 resize-none focus:ring-2 text-sm"
                                     style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} />
                             </div>
@@ -107,7 +110,7 @@ const Contact = () => {
                                 className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
                                 style={{ background: 'var(--gradient-primary)', boxShadow: '0 10px 40px rgba(6, 182, 212, 0.25)' }}>
                                 <Send size={18} />
-                                Send Message
+                                {t.contact.form.send}
                             </button>
                         </form>
                     </ScrollReveal>
@@ -116,7 +119,7 @@ const Contact = () => {
                 {/* Footer */}
                 <div className="mt-20 pt-8 text-center" style={{ borderTop: '1px solid var(--border-color)' }}>
                     <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                        © 2024 <span style={{ color: 'var(--accent-primary)' }}>Thariq Adzikra</span> • Built with ❤️ using React & Tailwind CSS
+                        © 2024 <span style={{ color: 'var(--accent-primary)' }}>Thariq Adzikra</span> • {t.contact.footer.text}
                     </p>
                 </div>
             </div>

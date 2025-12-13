@@ -1,68 +1,23 @@
 import { useState } from 'react';
 import { GraduationCap, School, BookOpen, Calendar, MapPin, Star } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Education = () => {
     const [expandedId, setExpandedId] = useState(null);
+    const { t } = useLanguage();
 
-    const educationData = [
-        {
-            id: 1,
-            level: 'UNIVERSITAS',
-            icon: GraduationCap,
-            logo: '🎓',
-            name: 'Universitas Riau',
-            major: 'Sistem Informasi',
-            period: '2021 - Sekarang',
-            location: 'Pekanbaru, Indonesia',
-            current: true,
-            gpa: '3.94 / 4.00',
-            description: 'Mahasiswa aktif Program Studi Sistem Informasi dengan fokus pada pengembangan perangkat lunak, data engineering, dan kecerdasan buatan.',
-            highlights: ['UI/UX Design', 'Fullstack Dev', 'Mobile Dev', 'Data Engineering']
-        },
-        {
-            id: 2,
-            level: 'SMA',
-            icon: School,
-            logo: '🏫',
-            name: 'SMA Negeri 1 Padang',
-            major: 'IPA / Sains',
-            period: '2018 - 2021',
-            location: 'Padang, Indonesia',
-            current: false,
-            gpa: '89.04',
-            description: 'Lulusan jurusan IPA dengan predikat memuaskan. Aktif dalam kegiatan akademik dan organisasi sekolah.',
-            highlights: ['Matematika', 'Fisika', 'Kimia', 'Biologi']
-        },
-        {
-            id: 3,
-            level: 'SMP',
-            icon: BookOpen,
-            logo: '📚',
-            name: 'SMP Negeri 2 Padang',
-            major: null,
-            period: '2015 - 2018',
-            location: 'Padang, Indonesia',
-            current: false,
-            gpa: null,
-            description: 'Menyelesaikan pendidikan menengah pertama dengan pembentukan karakter dan dasar akademik yang kuat.',
-            highlights: []
-        },
-        {
-            id: 4,
-            level: 'SD',
-            icon: BookOpen,
-            logo: '🎒',
-            name: 'SD Kartika 1-11 Padang',
-            major: null,
-            period: '2009 - 2015',
-            location: 'Padang, Indonesia',
-            current: false,
-            gpa: null,
-            description: 'Pendidikan dasar yang membentuk disiplin dan semangat belajar sejak dini.',
-            highlights: []
-        },
-    ];
+    const iconMap = {
+        1: GraduationCap,
+        2: School,
+        3: BookOpen,
+        4: BookOpen
+    };
+
+    const educationData = t.education.journey.map(edu => ({
+        ...edu,
+        icon: iconMap[edu.id]
+    }));
 
     const toggleExpand = (id) => {
         setExpandedId(expandedId === id ? null : id);
@@ -83,17 +38,17 @@ const Education = () => {
                         <div className="flex items-center justify-center gap-3 mb-6">
                             <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                             <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-primary)' }}>
-                                Background
+                                {t.education.label}
                             </span>
                             <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                         </div>
                         <h2 className="text-4xl md:text-5xl font-black mb-4"
                             style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
-                            Education{' '}
-                            <span style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Journey</span>
+                            {t.education.title}{' '}
+                            <span style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t.education.titleHighlight}</span>
                         </h2>
                         <p className="text-lg max-w-lg mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                            Perjalanan akademik yang membentuk kemampuan dan passion saya dalam teknologi
+                            {t.education.subtitle}
                         </p>
                     </div>
                 </ScrollReveal>
@@ -126,11 +81,7 @@ const Education = () => {
                                             }}>
                                             
                                             <div className={`flex gap-4 ${isLeft ? 'lg:flex-row-reverse text-right' : 'flex-row text-left'}`}>
-                                                {/* Logo */}
-                                                <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 transition-transform group-hover:scale-105"
-                                                    style={{ background: 'var(--bg-tertiary)' }}>
-                                                    {edu.logo}
-                                                </div>
+
 
                                                 {/* Info */}
                                                 <div className="flex-1 min-w-0 flex flex-col justify-center">
@@ -141,7 +92,7 @@ const Education = () => {
                                                         {edu.current && (
                                                             <span className="px-2 py-0.5 rounded text-[10px] font-bold text-white uppercase tracking-wide"
                                                                 style={{ background: 'var(--gradient-primary)' }}>
-                                                                Current
+                                                                {t.education.current}
                                                             </span>
                                                         )}
                                                     </div>
@@ -184,7 +135,7 @@ const Education = () => {
                                                         <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium"
                                                             style={{ background: 'var(--bg-card)', color: 'var(--accent-primary)' }}>
                                                             <Star size={10} />
-                                                            {edu.level === 'SMA' ? 'Rata-rata: ' : 'IPK: '}{edu.gpa}
+                                                            {edu.level === 'SMA' || edu.level === 'HIGH SCHOOL' ? `${t.education.average}: ` : `${t.education.gpa}: `}{edu.gpa}
                                                         </span>
                                                     )}
                                                 </div>
@@ -231,17 +182,17 @@ const Education = () => {
                         <div className="flex items-center justify-center gap-8 flex-wrap">
                             <div>
                                 <div className="text-3xl font-black" style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>15+</div>
-                                <div className="text-sm" style={{ color: 'var(--text-muted)' }}>Tahun Pendidikan</div>
+                                <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.education.stats.years}</div>
                             </div>
                             <div className="w-px h-12" style={{ background: 'var(--border-color)' }} />
                             <div>
                                 <div className="text-3xl font-black" style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>4</div>
-                                <div className="text-sm" style={{ color: 'var(--text-muted)' }}>Jenjang</div>
+                                <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.education.stats.levels}</div>
                             </div>
                             <div className="w-px h-12" style={{ background: 'var(--border-color)' }} />
                             <div>
                                 <div className="text-3xl font-black" style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>∞</div>
-                                <div className="text-sm" style={{ color: 'var(--text-muted)' }}>Semangat Belajar</div>
+                                <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.education.stats.spirit}</div>
                             </div>
                         </div>
                     </div>
