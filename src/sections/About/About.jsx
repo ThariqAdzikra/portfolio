@@ -39,7 +39,7 @@ const About = () => {
                                             boxShadow: '0 25px 80px -20px rgba(0, 0, 0, 0.5)'
                                         }}>
                                         <img 
-                                            src="/src/assets/images/fotothariq.png" 
+                                            src="public/pasfoto/fotothariq.png" 
                                             alt="Thariq Adzikra" 
                                             className="w-full h-full object-cover object-top"
                                         />
