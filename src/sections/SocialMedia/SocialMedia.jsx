@@ -1,5 +1,6 @@
 import { Github, Linkedin, Instagram, Youtube, Mail, ArrowUpRight } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import { useLanguage } from '../../context/LanguageContext';
 
 // Custom X (Twitter) icon
 const XIcon = ({ size = 24, color }) => (
@@ -9,13 +10,15 @@ const XIcon = ({ size = 24, color }) => (
 );
 
 const SocialMedia = () => {
+    const { t } = useLanguage();
+
     const socials = [
-        { name: 'GitHub', icon: Github, url: '#', color: '#ffffff', desc: 'View my repositories' },
-        { name: 'LinkedIn', icon: Linkedin, url: '#', color: '#0077b5', desc: 'Connect professionally' },
-        { name: 'Instagram', icon: Instagram, url: '#', color: '#e4405f', desc: 'Follow my journey' },
-        { name: 'X', icon: XIcon, url: '#', color: '#ffffff', desc: 'Read my thoughts' },
-        { name: 'YouTube', icon: Youtube, url: '#', color: '#ff0000', desc: 'Watch tutorials' },
-        { name: 'Email', icon: Mail, url: '#', color: 'var(--accent-primary)', desc: 'Send a message' },
+        { name: 'GitHub', icon: Github, url: '#', color: 'var(--text-primary)', desc: t.socialMedia.platforms.github },
+        { name: 'LinkedIn', icon: Linkedin, url: '#', color: '#0077b5', desc: t.socialMedia.platforms.linkedin },
+        { name: 'Instagram', icon: Instagram, url: '#', color: '#e4405f', desc: t.socialMedia.platforms.instagram },
+        { name: 'X', icon: XIcon, url: '#', color: 'var(--text-primary)', desc: t.socialMedia.platforms.x },
+        { name: 'YouTube', icon: Youtube, url: '#', color: '#ff0000', desc: t.socialMedia.platforms.youtube },
+        { name: 'Email', icon: Mail, url: '#', color: 'var(--accent-primary)', desc: t.socialMedia.platforms.email },
     ];
 
     return (
@@ -27,38 +30,38 @@ const SocialMedia = () => {
                         <div className="lg:text-right">
                             <div className="flex items-center gap-3 mb-6 lg:justify-end">
                                 <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-primary)' }}>
-                                    Connect
+                                    {t.socialMedia.label}
                                 </span>
                                 <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                             </div>
                             
                             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight"
                                 style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
-                                Let's Be
+                                {t.socialMedia.title}
                                 <span className="block" style={{ 
                                     background: 'var(--gradient-primary)',
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent'
                                 }}>
-                                    Friends
+                                    {t.socialMedia.titleHighlight}
                                 </span>
                             </h2>
 
                             <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                Follow me on social media to stay updated with my latest projects, thoughts, and journey in tech.
+                                {t.socialMedia.description}
                             </p>
 
                             {/* Stats */}
                             <div className="mt-8 p-6 rounded-2xl lg:text-left" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                                 <div className="flex items-center gap-8">
                                     <div>
-                                        <div className="text-3xl font-black" style={{ color: 'var(--accent-primary)' }}>1K+</div>
-                                        <div className="text-sm" style={{ color: 'var(--text-muted)' }}>Followers</div>
+                                        <div className="text-3xl font-black" style={{ color: 'var(--accent-primary)' }}>{t.socialMedia.stats.followers}</div>
+                                        <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.socialMedia.stats.followersLabel}</div>
                                     </div>
                                     <div className="w-px h-12" style={{ background: 'var(--border-color)' }} />
                                     <div>
-                                        <div className="text-3xl font-black" style={{ color: 'var(--accent-secondary)' }}>50+</div>
-                                        <div className="text-sm" style={{ color: 'var(--text-muted)' }}>Posts</div>
+                                        <div className="text-3xl font-black" style={{ color: 'var(--accent-secondary)' }}>{t.socialMedia.stats.posts}</div>
+                                        <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.socialMedia.stats.postsLabel}</div>
                                     </div>
                                 </div>
                             </div>

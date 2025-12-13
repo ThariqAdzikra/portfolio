@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Award, ChevronLeft, ChevronRight, ExternalLink, Calendar, Building2 } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import Modal from '../../components/Modal/Modal';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Certificates = () => {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -9,81 +10,20 @@ const Certificates = () => {
     const [selectedCert, setSelectedCert] = useState(null);
     const [activeImage, setActiveImage] = useState(0);
     const carouselRef = useRef(null);
+    const { t } = useLanguage();
 
-    const certificates = [
-        { 
-            id: 1, 
-            title: 'Web Development Fundamentals', 
-            issuer: 'Example Academy', 
-            year: '2024',
-            desc: 'Comprehensive course covering HTML5, CSS3, JavaScript ES6+, responsive design principles, and web accessibility standards. Completed with distinction.',
-            images: ['🌐', '💻', '📱'],
-            credentialUrl: 'https://example.com/cert/1'
-        },
-        { 
-            id: 2, 
-            title: 'React & Modern JavaScript', 
-            issuer: 'Tech Institute', 
-            year: '2024',
-            desc: 'Advanced training in React.js including hooks, context API, Redux state management, testing with Jest, and performance optimization techniques.',
-            images: ['⚛️', '🔄', '🧪'],
-            credentialUrl: 'https://example.com/cert/2'
-        },
-        { 
-            id: 3, 
-            title: 'Backend Development with Node.js', 
-            issuer: 'Online Learning', 
-            year: '2023',
-            desc: 'Full-stack backend development covering Express.js, RESTful API design, authentication, database integration, and deployment strategies.',
-            images: ['🖥️', '🔐', '🗄️'],
-            credentialUrl: 'https://example.com/cert/3'
-        },
-        { 
-            id: 4, 
-            title: 'Database Design & SQL', 
-            issuer: 'Tech Academy', 
-            year: '2023',
-            desc: 'In-depth training on relational database design, SQL queries, normalization, indexing, transactions, and NoSQL databases comparison.',
-            images: ['🗃️', '📊', '🔍'],
-            credentialUrl: 'https://example.com/cert/4'
-        },
-        { 
-            id: 5, 
-            title: 'UI/UX Design Principles', 
-            issuer: 'Design School', 
-            year: '2023',
-            desc: 'Foundation course in user interface and user experience design, including wireframing, prototyping, user research, and design systems.',
-            images: ['🎨', '✏️', '📐'],
-            credentialUrl: 'https://example.com/cert/5'
-        },
-        { 
-            id: 6, 
-            title: 'Cloud Computing Basics', 
-            issuer: 'Cloud Provider', 
-            year: '2023',
-            desc: 'Introduction to cloud services including compute, storage, networking, and deployment on major cloud platforms.',
-            images: ['☁️', '🚀', '⚡'],
-            credentialUrl: 'https://example.com/cert/6'
-        },
-        { 
-            id: 7, 
-            title: 'Git & Version Control', 
-            issuer: 'Dev Academy', 
-            year: '2022',
-            desc: 'Mastery of Git version control, branching strategies, collaboration workflows, CI/CD integration, and best practices.',
-            images: ['🔀', '📝', '👥'],
-            credentialUrl: 'https://example.com/cert/7'
-        },
-        { 
-            id: 8, 
-            title: 'Python for Data Science', 
-            issuer: 'Data Institute', 
-            year: '2022',
-            desc: 'Comprehensive Python training for data analysis including pandas, NumPy, data visualization, and basic machine learning concepts.',
-            images: ['🐍', '📈', '🤖'],
-            credentialUrl: 'https://example.com/cert/8'
-        },
-    ];
+    // Construct image paths dynamically
+    const certificates = t.certificates.data.map(cert => {
+        const images = Array.from({ length: cert.count }, (_, i) => 
+            `/sertifikat/${cert.folder}/${cert.folder}-${i + 1}.png`
+        );
+        
+        return {
+            ...cert,
+            images,
+            credentialUrl: '#' 
+        };
+    });
 
     const checkScroll = () => {
         if (carouselRef.current) {
@@ -99,8 +39,11 @@ const Certificates = () => {
         return () => carouselRef.current?.removeEventListener('scroll', checkScroll);
     }, []);
 
+    // Reset active image when modal opens
     useEffect(() => {
-        setActiveImage(0);
+        if (selectedCert) {
+            setActiveImage(0);
+        }
     }, [selectedCert]);
 
     const scroll = (dir) => carouselRef.current?.scrollBy({ left: dir === 'left' ? -320 : 320, behavior: 'smooth' });
@@ -114,17 +57,17 @@ const Certificates = () => {
                         <div className="flex items-center justify-center gap-3 mb-6">
                             <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                             <span className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--accent-primary)' }}>
-                                Achievements
+                                {t.certificates.label}
                             </span>
                             <div className="h-px w-12" style={{ background: 'var(--accent-primary)' }} />
                         </div>
                         <h2 className="text-4xl md:text-5xl font-black mb-4"
                             style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
-                            Certificates &{' '}
-                            <span style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Credentials</span>
+                            {t.certificates.title}{' '}
+                            <span style={{ background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t.certificates.titleHighlight}</span>
                         </h2>
                         <p className="text-lg max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                            Continuous learning journey with verified certifications
+                            {t.certificates.description}
                         </p>
 
                         {/* Navigation */}
@@ -153,20 +96,26 @@ const Certificates = () => {
                             <ScrollReveal key={cert.id} animation="fade-up" delay={Math.min(index + 1, 3)}>
                                 <div 
                                     onClick={() => setSelectedCert(cert)}
-                                    className="group w-[300px] h-[220px] flex-shrink-0 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer relative overflow-hidden flex flex-col"
+                                    className="group w-[300px] h-[340px] flex-shrink-0 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer relative overflow-hidden flex flex-col"
                                     style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                                     
                                     {/* Top Line Accent */}
                                     <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'var(--gradient-primary)' }} />
 
-                                    {/* Icon */}
-                                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 flex-shrink-0"
-                                        style={{ background: 'var(--gradient-primary)' }}>
-                                        <Award size={28} className="text-white" />
+                                    {/* Thumbnail Preview */}
+                                    <div className="w-full h-[160px] rounded-xl overflow-hidden mb-4 relative"
+                                        style={{ background: 'var(--bg-tertiary)' }}>
+                                        <img 
+                                            src={cert.images[0]} 
+                                            alt={cert.title}
+                                            className="w-full h-full object-cover transition-transform duration-500"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
                                     </div>
 
                                     {/* Content */}
-                                    <h3 className="text-lg font-bold leading-tight line-clamp-2 flex-1" style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
+                                    <h3 className="text-lg font-bold leading-tight line-clamp-2 mb-2 flex-1" style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
                                         {cert.title}
                                     </h3>
                                     
@@ -181,7 +130,7 @@ const Certificates = () => {
                                                 <Calendar size={14} />
                                                 <span>{cert.year}</span>
                                             </div>
-                                            <span className="text-xs font-medium" style={{ color: 'var(--accent-primary)' }}>View Details →</span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -194,78 +143,122 @@ const Certificates = () => {
                 <div className="text-center mt-8">
                     <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', color: 'var(--text-muted)' }}>
                         <Award size={14} style={{ color: 'var(--accent-primary)' }} />
-                        {certificates.length} certificates earned
+                        {certificates.length} {t.certificates.earned}
                     </span>
                 </div>
 
                 {/* Certificate Modal */}
                 <Modal isOpen={!!selectedCert} onClose={() => setSelectedCert(null)}>
                     {selectedCert && (
-                        <div className="flex flex-col md:flex-row">
+                        <div className="flex flex-col md:flex-row h-[80vh] md:h-auto overflow-hidden">
                             {/* Left - Image Gallery */}
-                            <div className="md:w-1/2 p-6" style={{ background: 'var(--bg-tertiary)' }}>
-                                {/* Main Preview */}
-                                <div className="aspect-square rounded-2xl flex items-center justify-center text-[100px] mb-4"
-                                    style={{ background: 'var(--bg-card)' }}>
-                                    {selectedCert.images[activeImage]}
+                            <div className="md:w-[60%] p-6 flex flex-col items-center justify-center bg-black/20" 
+                                style={{ background: 'var(--bg-tertiary)' }}>
+                                
+                                {/* Main Image Container */}
+                                <div className="w-full relative flex-1 min-h-0 flex items-center justify-center mb-4">
+                                    <div className="relative max-w-full max-h-full rounded-lg overflow-hidden shadow-2xl">
+                                        <img 
+                                            src={selectedCert.images[activeImage]} 
+                                            alt={`${selectedCert.title} - View ${activeImage + 1}`}
+                                            className="max-w-full max-h-[50vh] md:max-h-[60vh] object-contain"
+                                        />
+                                    </div>
+                                    
+                                    {/* Navigation Arrows for Multiple Images */}
+                                    {selectedCert.images.length > 1 && (
+                                        <>
+                                            <button 
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setActiveImage(prev => prev > 0 ? prev - 1 : selectedCert.images.length - 1);
+                                                }}
+                                                className="absolute left-2 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all backdrop-blur-sm"
+                                            >
+                                                <ChevronLeft size={24} />
+                                            </button>
+                                            <button 
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setActiveImage(prev => prev < selectedCert.images.length - 1 ? prev + 1 : 0);
+                                                }}
+                                                className="absolute right-2 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-all backdrop-blur-sm"
+                                            >
+                                                <ChevronRight size={24} />
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
                                 
-                                {/* Thumbnails */}
-                                <div className="flex gap-3 justify-center">
-                                    {selectedCert.images.map((img, i) => (
-                                        <button 
-                                            key={i}
-                                            onClick={() => setActiveImage(i)}
-                                            className={`w-14 h-14 rounded-xl flex items-center justify-center text-2xl transition-all ${activeImage === i ? 'ring-2 ring-offset-2 scale-105' : 'opacity-60 hover:opacity-100'}`}
-                                            style={{ 
-                                                background: 'var(--bg-card)',
-                                                ringColor: 'var(--accent-primary)',
-                                                ringOffsetColor: 'var(--bg-tertiary)'
-                                            }}>
-                                            {img}
-                                        </button>
-                                    ))}
-                                </div>
+                                {/* Thumbnails - Only show if > 1 image */}
+                                {selectedCert.images.length > 1 && (
+                                    <div className="flex gap-3 overflow-x-auto max-w-full pb-2 scrollbar-hide">
+                                        {selectedCert.images.map((img, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => setActiveImage(i)}
+                                                className={`relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                                                    activeImage === i 
+                                                        ? 'border-[var(--accent-primary)] opacity-100 scale-105' 
+                                                        : 'border-transparent opacity-60 hover:opacity-100 hover:scale-105'
+                                                }`}
+                                            >
+                                                <img 
+                                                    src={img} 
+                                                    alt={`Thumbnail ${i + 1}`}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                             
                             {/* Right - Content */}
-                            <div className="md:w-1/2 p-8">
+                            <div className="md:w-[40%] p-8 overflow-y-auto custom-scrollbar" style={{ background: 'var(--bg-tertiary)' }}>
                                 <div className="flex items-center gap-2 mb-4">
                                     <Award size={24} style={{ color: 'var(--accent-primary)' }} />
-                                    <span className="text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--accent-primary)' }}>Certificate</span>
+                                    <span className="text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--accent-primary)' }}>{t.certificates.modalTitle}</span>
                                 </div>
                                 
                                 <h3 className="text-2xl font-black mb-4" style={{ color: 'var(--text-primary)', fontFamily: "'Space Grotesk', sans-serif" }}>
                                     {selectedCert.title}
                                 </h3>
                                 
-                                <div className="space-y-2 mb-6">
-                                    <div className="flex items-center gap-3" style={{ color: 'var(--text-secondary)' }}>
-                                        <Building2 size={18} style={{ color: 'var(--accent-primary)' }} />
-                                        <span>{selectedCert.issuer}</span>
+                                <div className="space-y-4 mb-8">
+                                    <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                        <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-tertiary)' }}>
+                                            <Building2 size={20} style={{ color: 'var(--accent-primary)' }} />
+                                        </div>
+                                        <div>
+                                            <span className="text-xs block opacity-70">Issuer</span>
+                                            <span className="font-medium">{selectedCert.issuer}</span>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center gap-3" style={{ color: 'var(--text-secondary)' }}>
-                                        <Calendar size={18} style={{ color: 'var(--accent-primary)' }} />
-                                        <span>{selectedCert.year}</span>
+                                    <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                        <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-tertiary)' }}>
+                                            <Calendar size={20} style={{ color: 'var(--accent-primary)' }} />
+                                        </div>
+                                        <div>
+                                            <span className="text-xs block opacity-70">Date</span>
+                                            <span className="font-medium">{selectedCert.year}</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
                                     {selectedCert.desc}
                                 </p>
-                                
-                                <a href={selectedCert.credentialUrl} target="_blank" rel="noopener noreferrer"
-                                    className="w-full h-12 flex items-center justify-center gap-2 rounded-xl font-bold text-white transition-all hover:scale-105"
-                                    style={{ background: 'var(--gradient-primary)' }}>
-                                    <ExternalLink size={18} />
-                                    View Credential
-                                </a>
                             </div>
                         </div>
                     )}
                 </Modal>
             </div>
-            <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
+            <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; } 
+            .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+            .custom-scrollbar::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+            .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+            `}</style>
         </section>
     );
 };
