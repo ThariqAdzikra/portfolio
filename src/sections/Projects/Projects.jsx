@@ -14,20 +14,17 @@ const Projects = () => {
     const { t } = useLanguage();
 
     const imageMap = {
-        1: ['🛒', '💳', '📦'], 
-        2: ['📋', '✅', '👥'], 
-        3: ['📊', '📈', '💰'], 
-        4: ['🌤️', '🌧️', '❄️'], 
-        5: ['💬', '📹', '📎'], 
-        6: ['📝', '✍️', '📰']
+        4: ['📊', '📈', '💰'], 
+        5: ['🌤️', '🌧️', '❄️'], 
+        6: ['💬', '📹', '📎'], 
+        7: ['📝', '✍️', '📰']
     };
 
     const projects = t.projects.data.map(proj => ({
         ...proj,
-        images: imageMap[proj.id] || ['📁'],
-        // Keep links hardcoded or move to translations if they change by language (unlikely for now)
-        github: 'https://github.com/yourusername/project', 
-        demo: 'https://demo.com' 
+        images: proj.images || imageMap[proj.id] || ['📁'],
+        github: proj.github || 'https://github.com/yourusername/project', 
+        demo: proj.demo !== undefined ? proj.demo : 'https://demo.com' 
     }));
 
     const checkScroll = () => {
@@ -94,24 +91,27 @@ const Projects = () => {
                                 <TiltCard key={project.id} scale={1.02} maxRotation={5}>
                                     <div 
                                         onClick={() => setSelectedProject(project)}
-                                        className="group w-[360px] h-[380px] flex-shrink-0 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl flex flex-col cursor-pointer"
+                                        className="group w-[360px] h-[420px] flex-shrink-0 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl flex flex-col cursor-pointer"
                                         style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                                         
                                         {/* Image Area */}
                                         <div className="h-[180px] relative overflow-hidden flex-shrink-0" style={{ background: 'var(--bg-tertiary)' }}>
-                                            <div className="absolute inset-0 flex items-center justify-center text-7xl">
-                                                {project.images[0]}
-                                            </div>
+                                            {project.isRealProject ? (
+                                                <img 
+                                                    src={project.images[0]} 
+                                                    alt={project.title}
+                                                    className="w-full h-full object-cover object-top"
+                                                />
+                                            ) : (
+                                                <div className="absolute inset-0 flex items-center justify-center text-7xl">
+                                                    {project.images[0]}
+                                                </div>
+                                            )}
                                             
                                             {/* Hover Overlay */}
                                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
                                                 style={{ background: 'rgba(6, 182, 212, 0.9)' }}>
                                                 <span className="text-white font-bold">{t.projects.viewDetails}</span>
-                                            </div>
-
-                                            {/* Folder Icon */}
-                                            <div className="absolute top-4 left-4">
-                                                <Folder size={24} style={{ color: 'var(--accent-primary)' }} />
                                             </div>
                                         </div>
 
@@ -145,27 +145,62 @@ const Projects = () => {
                         <div className="flex flex-col md:flex-row">
                             {/* Left - Image Gallery */}
                             <div className="md:w-1/2 p-6" style={{ background: 'var(--bg-tertiary)' }}>
-                                {/* Main Preview */}
-                                <div className="aspect-square rounded-2xl flex items-center justify-center text-[120px] mb-4"
-                                    style={{ background: 'var(--bg-card)' }}>
-                                    {selectedProject.images[activeImage]}
+                                {/* Main Preview with Scrollbar */}
+                                <div className="rounded-2xl overflow-hidden mb-4 max-h-[400px] overflow-y-auto"
+                                    style={{ background: 'var(--bg-card)', scrollbarWidth: 'thin', scrollbarColor: 'var(--accent-primary) var(--bg-card)' }}>
+                                    {selectedProject.isRealProject ? (
+                                        <img 
+                                            src={selectedProject.images[activeImage]} 
+                                            alt={selectedProject.title}
+                                            className="w-full h-auto object-contain"
+                                        />
+                                    ) : (
+                                        <div className="aspect-video flex items-center justify-center">
+                                            <span className="text-[120px]">{selectedProject.images[activeImage]}</span>
+                                        </div>
+                                    )}
                                 </div>
                                 
-                                {/* Thumbnails */}
-                                <div className="flex gap-3 justify-center">
-                                    {selectedProject.images.map((img, i) => (
-                                        <button 
-                                            key={i}
-                                            onClick={() => setActiveImage(i)}
-                                            className={`w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all ${activeImage === i ? 'ring-2 ring-offset-2 scale-105' : 'opacity-60 hover:opacity-100'}`}
-                                            style={{ 
-                                                background: 'var(--bg-card)',
-                                                ringColor: 'var(--accent-primary)',
-                                                ringOffsetColor: 'var(--bg-tertiary)'
-                                            }}>
-                                            {img}
-                                        </button>
-                                    ))}
+                                {/* Thumbnails - Horizontal Carousel */}
+                                <div className="flex items-center gap-2">
+                                    {/* Previous Button */}
+                                    <button 
+                                        onClick={() => setActiveImage(prev => prev > 0 ? prev - 1 : selectedProject.images.length - 1)}
+                                        className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-110"
+                                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}>
+                                        <ChevronLeft size={16} />
+                                    </button>
+                                    
+                                    {/* Thumbnails Container */}
+                                    <div className="flex-1 overflow-x-auto scrollbar-hide">
+                                        <div className="flex gap-2 justify-start">
+                                            {selectedProject.images.map((img, i) => (
+                                                <button 
+                                                    key={i}
+                                                    onClick={() => setActiveImage(i)}
+                                                    className={`w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden transition-all flex-shrink-0 ${activeImage === i ? 'ring-2 ring-offset-2 scale-105' : 'opacity-60 hover:opacity-100'}`}
+                                                    style={{ 
+                                                        background: 'var(--bg-card)',
+                                                        ringColor: 'var(--accent-primary)',
+                                                        ringOffsetColor: 'var(--bg-tertiary)'
+                                                    }}>
+                                                    {selectedProject.isRealProject ? (
+                                                        <img src={img} alt="" className="w-full h-full object-cover" />
+                                                    ) : (
+                                                        <span className="text-2xl">{img}</span>
+                                                    )}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Next Button */}
+                                    <button 
+                                        onClick={() => setActiveImage(prev => prev < selectedProject.images.length - 1 ? prev + 1 : 0)}
+                                        className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-110"
+                                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}>
+                                        <ChevronRight size={16} />
+                                    </button>
                                 </div>
                             </div>
                             
@@ -189,12 +224,14 @@ const Projects = () => {
                                 </p>
                                 
                                 <div className="space-y-3">
-                                    <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer"
-                                        className="w-full h-12 flex items-center justify-center gap-2 rounded-xl font-bold text-white transition-all hover:scale-105"
-                                        style={{ background: 'var(--gradient-primary)' }}>
-                                        <ExternalLink size={18} />
-                                        {t.projects.liveDemo}
-                                    </a>
+                                    {selectedProject.demo && (
+                                        <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer"
+                                            className="w-full h-12 flex items-center justify-center gap-2 rounded-xl font-bold text-white transition-all hover:scale-105"
+                                            style={{ background: 'var(--gradient-primary)' }}>
+                                            <ExternalLink size={18} />
+                                            {t.projects.liveDemo}
+                                        </a>
+                                    )}
                                     <a href={selectedProject.github} target="_blank" rel="noopener noreferrer"
                                         className="w-full h-12 flex items-center justify-center gap-2 rounded-xl font-bold transition-all hover:scale-105"
                                         style={{ background: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>
