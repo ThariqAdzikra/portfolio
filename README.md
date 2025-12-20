@@ -1,7 +1,5 @@
 # 🚀 Professional & Creative Portfolio
 
-![Portfolio Preview](public/preview-banner.png)
-
 A modern, responsive, and interactive personal portfolio website built with **React**, **Vite**, and **Tailwind CSS**. Designed to showcase professional skills, projects, and experience with a polished and engaging user experience.
 
 ## ✨ Key Features
