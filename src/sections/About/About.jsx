@@ -1,6 +1,7 @@
-import { MapPin, Briefcase, Download, Code2, Lightbulb, Heart } from 'lucide-react';
+import { MapPin, Download, Code2, Lightbulb, Heart } from 'lucide-react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import TiltCard from '../../components/TiltCard/TiltCard';
+import StarBorder from '../../components/StarBorder/StarBorder';
 import { useLanguage } from '../../context/LanguageContext';
 
 const About = () => {
@@ -28,27 +29,33 @@ const About = () => {
                                     }} />
                             </div>
                             
-                            {/* Photo Container */}
+                            {/* Photo Container with Star Border */}
                             <div className="relative">
                                 <TiltCard className="relative z-10" maxRotation={10} scale={1.02}>
-                                    {/* Main Photo */}
-                                    <div className="relative w-[300px] h-[380px] rounded-3xl overflow-hidden"
-                                        style={{ 
-                                            background: 'linear-gradient(180deg, var(--bg-card) 0%, var(--bg-tertiary) 100%)',
-                                            border: '1px solid var(--border-color)',
-                                            boxShadow: '0 25px 80px -20px rgba(0, 0, 0, 0.5)'
-                                        }}>
-                                        <img 
-                                            src="/pasfoto/fotothariq.png" 
-                                            alt="Thariq Adzikra" 
-                                            className="w-full h-full object-cover object-top"
-                                        />
-                                        {/* Gradient overlay at bottom */}
-                                        <div className="absolute bottom-0 left-0 right-0 h-24"
-                                            style={{ background: 'linear-gradient(to top, var(--bg-card), transparent)' }} />
-                                    </div>
+                                    <StarBorder 
+                                        color="#06b6d4" 
+                                        speed={4} 
+                                        borderWidth={2}
+                                        borderRadius={24}
+                                    >
+                                        {/* Main Photo */}
+                                        <div className="relative w-[300px] h-[380px] rounded-3xl overflow-hidden"
+                                            style={{ 
+                                                background: 'linear-gradient(180deg, var(--bg-card) 0%, var(--bg-tertiary) 100%)',
+                                                boxShadow: '0 25px 80px -20px rgba(0, 0, 0, 0.5)'
+                                            }}>
+                                            <img 
+                                                src="/pasfoto/fotothariq.png" 
+                                                alt="Thariq Adzikra" 
+                                                className="w-full h-full object-cover object-top"
+                                            />
+                                            {/* Gradient overlay at bottom */}
+                                            <div className="absolute bottom-0 left-0 right-0 h-24"
+                                                style={{ background: 'linear-gradient(to top, var(--bg-card), transparent)' }} />
+                                        </div>
+                                    </StarBorder>
 
-                                    {/* Floating Stats Card - Now inside TiltCard for 3D depth */}
+                                    {/* Floating Stats Card */}
                                     <div className="absolute -right-8 bottom-12 p-4 rounded-2xl backdrop-blur-xl"
                                         style={{ 
                                             transform: 'translateZ(30px)',

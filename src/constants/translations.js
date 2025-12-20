@@ -238,17 +238,77 @@ export const translations = {
                 },
                 {
                     id: 7,
-                    title: 'Aplikasi Chat',
-                    desc: 'Obrolan real-time dengan ruang, berbagi file, dan panggilan video.',
-                    fullDesc: 'Platform perpesanan berfitur lengkap dengan obrolan pribadi dan grup, panggilan suara dan video, berbagi layar, lampiran file, reaksi pesan, dan enkripsi end-to-end.',
-                    tags: ['Socket.io', 'WebRTC'],
+                    title: 'AirMap - Monitoring Kualitas Udara',
+                    desc: 'Aplikasi pemantauan kualitas udara dan deteksi titik api (kebakaran hutan) real-time di Indonesia berbasis web dengan peta interaktif.',
+                    fullDesc: 'AirMap adalah aplikasi web untuk pemantauan kualitas udara dan deteksi titik api (kebakaran hutan) secara real-time di Indonesia. Menggunakan peta interaktif berbasis Leaflet.js, aplikasi ini mengintegrasikan data dari NASA FIRMS untuk titik api, WAQI untuk indeks kualitas udara, dan Nominatim OpenStreetMap untuk geocoding. Dibangun dengan frontend HTML5, CSS3, JavaScript ES6+ dan backend PHP 7.4+ dengan database MySQL.',
+                    tags: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL', 'Leaflet.js'],
+                    github: 'https://github.com/ThariqAdzikra/Airmap',
+                    demo: null,
+                    images: [
+                        '/projek/airmap/airmap1.jpeg',
+                        '/projek/airmap/airmap2.jpeg',
+                        '/projek/airmap/airmap3.jpeg'
+                    ],
+                    isRealProject: true,
                 },
                 {
                     id: 8,
-                    title: 'Platform Blog',
-                    desc: 'Blog modern dengan editor markdown dan optimasi SEO.',
-                    fullDesc: 'Platform blogging yang kuat dengan editor markdown yang kaya, optimasi gambar, alat SEO, berbagi sosial, sistem komentar, integrasi buletin, dan dashboard analitik.',
-                    tags: ['Next.js', 'MDX'],
+                    title: 'Integrasi Biodata',
+                    desc: 'Aplikasi Android untuk integrasi dan manajemen data biodata menggunakan SQLite sebagai database lokal.',
+                    fullDesc: 'Integrasi Biodata adalah aplikasi Android native yang dirancang untuk mengintegrasikan dan mengelola berbagai data biodata yang terpisah ke dalam satu platform terpadu. Aplikasi ini memanfaatkan SQLite sebagai database lokal untuk penyimpanan data yang efisien dan cepat. Dibangun menggunakan Java dengan Android Studio, aplikasi ini menerapkan arsitektur CRUD (Create, Read, Update, Delete) untuk pengelolaan data yang lengkap dengan antarmuka yang intuitif dan responsif.',
+                    tags: ['Java', 'Android Studio', 'SQLite', 'Android SDK', 'XML Layout'],
+                    github: 'https://github.com/ThariqAdzikra/project5miliyar',
+                    demo: null,
+                    images: [
+                        '/projek/biodata/biodata1.png',
+                        '/projek/biodata/biodata2.png',
+                        '/projek/biodata/biodata3.png'
+                    ],
+                    isRealProject: true,
+                },
+                {
+                    id: 9,
+                    title: 'Tebak Angka',
+                    desc: 'Permainan tebak angka dari 1-100 dengan 10 nyawa berbasis Android.',
+                    fullDesc: 'Tebak Angka adalah permainan sederhana namun adiktif yang menantang pemain untuk menebak angka rahasia antara 1 hingga 100. Pemain diberikan 10 nyawa untuk menebak dengan benar, dan aplikasi akan memberikan petunjuk apakah tebakan terlalu tinggi atau terlalu rendah. Dibangun menggunakan Java dengan Android Studio, game ini menerapkan logic sederhana namun efektif untuk gameplay yang menyenangkan.',
+                    tags: ['Java', 'Android Studio', 'SQLite', 'Android SDK', 'XML Layout'],
+                    github: 'https://github.com/ThariqAdzikra/TebakAngka',
+                    demo: null,
+                    images: [
+                        '/projek/tebakangka/tebakangka1.png',
+                        '/projek/tebakangka/tebakangka2.png',
+                        '/projek/tebakangka/tebakangka3.png',
+                        '/projek/tebakangka/tebakangka4.png'
+                    ],
+                    isRealProject: true,
+                },
+                {
+                    id: 10,
+                    title: 'Bioskop - Pemesanan Tiket',
+                    desc: 'Aplikasi pemesanan tiket bioskop berbasis Java yang menerapkan 5 pilar dasar OOP.',
+                    fullDesc: 'Bioskop adalah aplikasi pemesanan tiket bioskop berbasis Java yang menerapkan 5 pilar dasar Object-Oriented Programming (OOP): Encapsulation, Abstraction, Inheritance, Polymorphism, dan Association. Fitur meliputi pemilihan film, pemilihan bangku dengan visualisasi kursi, sistem pembayaran, dan cetak struk/receipt. Aplikasi ini dirancang sebagai implementasi praktis konsep OOP dalam pengembangan perangkat lunak.',
+                    tags: ['Java', 'OOP', 'Console Application'],
+                    github: 'https://github.com/ThariqAdzikra/Bioskop',
+                    demo: null,
+                    images: [
+                        '/projek/bioskop/biskop1.png',
+                        '/projek/bioskop/biskop2.png'
+                    ],
+                    isRealProject: true,
+                },
+                {
+                    id: 11,
+                    title: 'Kasir Showroom Motor',
+                    desc: 'Sistem kasir untuk showroom motor berbasis Java dengan fitur transaksi lengkap.',
+                    fullDesc: 'Kasir Showroom Motor adalah aplikasi point-of-sale (POS) berbasis Java yang dirancang untuk mengelola transaksi penjualan di showroom motor. Fitur mencakup manajemen data motor, pencatatan transaksi penjualan, perhitungan otomatis, dan cetak struk. Aplikasi ini dibangun menggunakan dasar-dasar pemrograman Java seperti variabel, kondisi, perulangan, array, dan method.',
+                    tags: ['Java', 'Console Application'],
+                    github: 'https://github.com/ThariqAdzikra/kasir',
+                    demo: null,
+                    images: [
+                        '/projek/kasir/kasir1.png',
+                        '/projek/kasir/kasir2.png'
+                    ],
+                    isRealProject: true,
                 },
             ]
         },
@@ -275,6 +335,7 @@ export const translations = {
                 { id: 12, title: 'Panitia Rumpi IT', issuer: 'Rumpi IT', year: '2023', desc: 'Sertifikat partisipasi aktif sebagai panitia event Rumpi IT.', folder: 'Sertifikat Panitia Rumpi IT', count: 1 },
                 { id: 13, title: 'Samsung Innovation Campus Stage 1', issuer: 'Samsung', year: '2023', desc: 'Penyelesaian tahap pertama program Samsung Innovation Campus.', folder: 'Sertifikat SIC6 Stage 1', count: 1 },
                 { id: 14, title: 'Visualisasi Data', issuer: 'Dicoding', year: '2023', desc: 'Keahlian dalam menyajikan data secara visual yang efektif.', folder: 'Sertifikat Visualisasi Data', count: 2 },
+                { id: 15, title: 'Hackathon IMPHNEN x Kolosal AI', issuer: 'IMPHNEN & Kolosal AI', year: '2024', desc: 'Sertifikat partisipasi Hackathon IMPHNEN x Kolosal AI sebagai Tim "Telor Gulung". Kompetisi pengembangan aplikasi berbasis AI.', folder: 'hacktonIMPHNEN', count: 1 },
             ]
         },
         socialMedia: {
@@ -298,10 +359,10 @@ export const translations = {
             }
         },
         contact: {
-            label: 'Hubungi Saya',
-            title: 'Mari Bekerja',
-            titleHighlight: 'Sama',
-            subtitle: 'Punya proyek impian? Saya ingin mendengar dari Anda!',
+            label: 'Hubungi',
+            title: 'Mari',
+            titleHighlight: 'Terhubung',
+            subtitle: 'Tertarik bekerja sama atau ingin bertanya? Jangan ragu untuk menghubungi saya!',
             info: {
                 email: 'Email',
                 location: 'Lokasi',
@@ -309,7 +370,7 @@ export const translations = {
             },
             available: {
                 title: 'Tersedia Sekarang',
-                subtitle: 'Saya terbuka untuk proyek freelance dan peluang full-time.'
+                subtitle: 'Terbuka untuk peluang kerja, proyek freelance, dan kolaborasi.'
             },
             form: {
                 name: 'Nama',
@@ -317,9 +378,9 @@ export const translations = {
                 email: 'Email',
                 emailPlaceholder: 'john@example.com',
                 subject: 'Subjek',
-                subjectPlaceholder: 'Pertanyaan proyek',
+                subjectPlaceholder: 'Tuliskan subjek disini...',
                 message: 'Pesan',
-                messagePlaceholder: 'Ceritakan tentang proyek Anda...',
+                messagePlaceholder: 'Tuliskan pesan Anda disini...',
                 send: 'Kirim Pesan',
             },
             footer: {
@@ -565,17 +626,77 @@ export const translations = {
                 },
                 {
                     id: 7,
-                    title: 'Chat Application',
-                    desc: 'Real-time chat with rooms, file sharing, and video calls.',
-                    fullDesc: 'A full-featured messaging platform with private and group chats, voice and video calling, screen sharing, file attachments, message reactions, and end-to-end encryption.',
-                    tags: ['Socket.io', 'WebRTC'],
+                    title: 'AirMap - Air Quality Monitoring',
+                    desc: 'Real-time air quality monitoring and fire hotspot (forest fire) detection web application for Indonesia with interactive maps.',
+                    fullDesc: 'AirMap is a web application for real-time air quality monitoring and fire hotspot (forest fire) detection in Indonesia. Using interactive maps powered by Leaflet.js, the app integrates data from NASA FIRMS for fire hotspots, WAQI for air quality index, and Nominatim OpenStreetMap for geocoding. Built with HTML5, CSS3, JavaScript ES6+ frontend and PHP 7.4+ backend with MySQL database.',
+                    tags: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL', 'Leaflet.js'],
+                    github: 'https://github.com/ThariqAdzikra/Airmap',
+                    demo: null,
+                    images: [
+                        '/projek/airmap/airmap1.jpeg',
+                        '/projek/airmap/airmap2.jpeg',
+                        '/projek/airmap/airmap3.jpeg'
+                    ],
+                    isRealProject: true,
                 },
                 {
                     id: 8,
-                    title: 'Blog Platform',
-                    desc: 'Modern blog with markdown editor and SEO optimization.',
-                    fullDesc: 'A powerful blogging platform with a rich markdown editor, image optimization, SEO tools, social sharing, comment system, newsletter integration, and analytics dashboard.',
-                    tags: ['Next.js', 'MDX'],
+                    title: 'Biodata Integration',
+                    desc: 'Android application for integrating and managing biodata using SQLite as local database.',
+                    fullDesc: 'Biodata Integration is a native Android application designed to integrate and manage various separated biodata into one unified platform. The app utilizes SQLite as a local database for efficient and fast data storage. Built using Java with Android Studio, this application implements CRUD (Create, Read, Update, Delete) architecture for complete data management with an intuitive and responsive interface.',
+                    tags: ['Java', 'Android Studio', 'SQLite', 'Android SDK', 'XML Layout'],
+                    github: 'https://github.com/ThariqAdzikra/project5miliyar',
+                    demo: null,
+                    images: [
+                        '/projek/biodata/biodata1.png',
+                        '/projek/biodata/biodata2.png',
+                        '/projek/biodata/biodata3.png'
+                    ],
+                    isRealProject: true,
+                },
+                {
+                    id: 9,
+                    title: 'Guess Number',
+                    desc: 'Number guessing game from 1-100 with 10 lives on Android platform.',
+                    fullDesc: 'Guess Number is a simple yet addictive game that challenges players to guess a secret number between 1 and 100. Players are given 10 lives to guess correctly, and the app provides hints whether the guess is too high or too low. Built using Java with Android Studio, this game implements simple but effective logic for enjoyable gameplay.',
+                    tags: ['Java', 'Android Studio', 'SQLite', 'Android SDK', 'XML Layout'],
+                    github: 'https://github.com/ThariqAdzikra/TebakAngka',
+                    demo: null,
+                    images: [
+                        '/projek/tebakangka/tebakangka1.png',
+                        '/projek/tebakangka/tebakangka2.png',
+                        '/projek/tebakangka/tebakangka3.png',
+                        '/projek/tebakangka/tebakangka4.png'
+                    ],
+                    isRealProject: true,
+                },
+                {
+                    id: 10,
+                    title: 'Cinema - Ticket Booking',
+                    desc: 'Java-based cinema ticket booking application implementing 5 core OOP pillars.',
+                    fullDesc: 'Cinema is a Java-based movie ticket booking application that implements the 5 core pillars of Object-Oriented Programming (OOP): Encapsulation, Abstraction, Inheritance, Polymorphism, and Association. Features include movie selection, seat selection with visual seat layout, payment system, and receipt printing. This application is designed as a practical implementation of OOP concepts in software development.',
+                    tags: ['Java', 'OOP', 'Console Application'],
+                    github: 'https://github.com/ThariqAdzikra/Bioskop',
+                    demo: null,
+                    images: [
+                        '/projek/bioskop/biskop1.png',
+                        '/projek/bioskop/biskop2.png'
+                    ],
+                    isRealProject: true,
+                },
+                {
+                    id: 11,
+                    title: 'Motorcycle Showroom Cashier',
+                    desc: 'Java-based cashier system for motorcycle showroom with complete transaction features.',
+                    fullDesc: 'Motorcycle Showroom Cashier is a Java-based point-of-sale (POS) application designed to manage sales transactions at motorcycle showrooms. Features include motorcycle data management, sales transaction recording, automatic calculations, and receipt printing. This application is built using Java programming fundamentals such as variables, conditions, loops, arrays, and methods.',
+                    tags: ['Java', 'Console Application'],
+                    github: 'https://github.com/ThariqAdzikra/kasir',
+                    demo: null,
+                    images: [
+                        '/projek/kasir/kasir1.png',
+                        '/projek/kasir/kasir2.png'
+                    ],
+                    isRealProject: true,
                 },
             ]
         },
@@ -602,6 +723,7 @@ export const translations = {
                 { id: 12, title: 'Rumpi IT Committee', issuer: 'Rumpi IT', year: '2023', desc: 'Active participation certificate as Rumpi IT event committee.', folder: 'Sertifikat Panitia Rumpi IT', count: 1 },
                 { id: 13, title: 'Samsung Innovation Campus Stage 1', issuer: 'Samsung', year: '2023', desc: 'Completion of the first stage of Samsung Innovation Campus program.', folder: 'Sertifikat SIC6 Stage 1', count: 1 },
                 { id: 14, title: 'Data Visualization', issuer: 'Dicoding', year: '2023', desc: 'Expertise in presenting data visually and effectively.', folder: 'Sertifikat Visualisasi Data', count: 2 },
+                { id: 15, title: 'Hackathon IMPHNEN x Kolosal AI', issuer: 'IMPHNEN & Kolosal AI', year: '2024', desc: 'Participation certificate for IMPHNEN x Kolosal AI Hackathon as Team "Telor Gulung". An AI-based application development competition.', folder: 'hacktonIMPHNEN', count: 1 },
             ]
         },
         socialMedia: {
@@ -626,9 +748,9 @@ export const translations = {
         },
         contact: {
             label: 'Get In Touch',
-            title: 'Let\'s Work',
-            titleHighlight: 'Together',
-            subtitle: 'Have a project in mind? I\'d love to hear from you!',
+            title: 'Let\'s',
+            titleHighlight: 'Connect',
+            subtitle: 'Interested in working together or have questions? Feel free to reach out!',
             info: {
                 email: 'Email',
                 location: 'Location',
@@ -636,7 +758,7 @@ export const translations = {
             },
             available: {
                 title: 'Currently Available',
-                subtitle: 'I\'m open for freelance projects and full-time opportunities.'
+                subtitle: 'Open for job opportunities, freelance projects, and collaborations.'
             },
             form: {
                 name: 'Name',
@@ -644,9 +766,9 @@ export const translations = {
                 email: 'Email',
                 emailPlaceholder: 'john@example.com',
                 subject: 'Subject',
-                subjectPlaceholder: 'Project inquiry',
+                subjectPlaceholder: 'Write subject here...',
                 message: 'Message',
-                messagePlaceholder: 'Tell me about your project...',
+                messagePlaceholder: 'Write your message here...',
                 send: 'Send Message',
             },
             footer: {

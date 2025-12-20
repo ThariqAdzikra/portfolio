@@ -1,12 +1,15 @@
-import { Mail, MapPin, Send, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, MapPin, Send, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import { useLanguage } from '../../context/LanguageContext';
 
 const Contact = () => {
     const { t } = useLanguage();
+    const [state, handleSubmit] = useForm("xqezpdzl");
 
     const contactInfo = [
-        { icon: Mail, label: t.contact.info.email, value: 'your.email@example.com', link: 'mailto:your.email@example.com' },
+        { icon: Mail, label: t.contact.info.email, value: 'adzthariq@gmail.com', link: 'mailto:adzthariq@gmail.com' },
         { icon: MapPin, label: t.contact.info.location, value: 'Indonesia', link: null },
         { icon: Clock, label: t.contact.info.timezone, value: 'GMT+7 (WIB)', link: null },
     ];
@@ -76,43 +79,96 @@ const Contact = () => {
 
                     {/* Right - Form */}
                     <ScrollReveal animation="fade-left" delay={1} className="lg:col-span-7">
-                        <form className="p-8 rounded-3xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
-                            <div className="grid sm:grid-cols-2 gap-5 mb-5">
-                                <div>
-                                    <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.name}</label>
-                                    <input type="text" placeholder={t.contact.form.namePlaceholder} 
-                                        className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
-                                        style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', '--tw-ring-color': 'var(--accent-primary)' }} />
+                        {state.succeeded ? (
+                            <div className="p-8 rounded-3xl text-center" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(16, 185, 129, 0.1)' }}>
+                                    <CheckCircle size={40} className="text-emerald-500" />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.email}</label>
-                                    <input type="email" placeholder={t.contact.form.emailPlaceholder} 
-                                        className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
-                                        style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} />
+                                <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                                    {t.contact.form.successTitle || 'Message Sent!'}
+                                </h3>
+                                <p style={{ color: 'var(--text-secondary)' }}>
+                                    {t.contact.form.successMessage || 'Thank you for reaching out. I will get back to you soon!'}
+                                </p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="p-8 rounded-3xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                <div className="grid sm:grid-cols-2 gap-5 mb-5">
+                                    <div>
+                                        <label htmlFor="name" className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.name}</label>
+                                        <input 
+                                            id="name"
+                                            type="text" 
+                                            name="name"
+                                            placeholder="Your Name"
+                                            required
+                                            className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
+                                            style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', '--tw-ring-color': 'var(--accent-primary)' }} 
+                                        />
+                                        <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-xs mt-1" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.email}</label>
+                                        <input 
+                                            id="email"
+                                            type="email" 
+                                            name="email"
+                                            placeholder="youremail@example.com"
+                                            required
+                                            className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
+                                            style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} 
+                                        />
+                                        <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-xs mt-1" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="mb-5">
-                                <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.subject}</label>
-                                <input type="text" placeholder={t.contact.form.subjectPlaceholder} 
-                                    className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
-                                    style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} />
-                            </div>
+                                <div className="mb-5">
+                                    <label htmlFor="subject" className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.subject}</label>
+                                    <input 
+                                        id="subject"
+                                        type="text" 
+                                        name="subject"
+                                        placeholder={t.contact.form.subjectPlaceholder || 'Write subject here...'}
+                                        required
+                                        className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 focus:ring-2 text-sm"
+                                        style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} 
+                                    />
+                                    <ValidationError prefix="Subject" field="subject" errors={state.errors} className="text-red-400 text-xs mt-1" />
+                                </div>
 
-                            <div className="mb-6">
-                                <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.message}</label>
-                                <textarea rows="5" placeholder={t.contact.form.messagePlaceholder} 
-                                    className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 resize-none focus:ring-2 text-sm"
-                                    style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} />
-                            </div>
+                                <div className="mb-6">
+                                    <label htmlFor="message" className="block text-sm font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{t.contact.form.message}</label>
+                                    <textarea 
+                                        id="message"
+                                        name="message"
+                                        rows="5" 
+                                        placeholder={t.contact.form.messagePlaceholder}
+                                        required
+                                        className="w-full px-4 py-3.5 rounded-xl outline-none transition-all duration-200 resize-none focus:ring-2 text-sm"
+                                        style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} 
+                                    />
+                                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-xs mt-1" />
+                                </div>
 
-                            <button type="submit" 
-                                className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-                                style={{ background: 'var(--gradient-primary)', boxShadow: '0 10px 40px rgba(6, 182, 212, 0.25)' }}>
-                                <Send size={18} />
-                                {t.contact.form.send}
-                            </button>
-                        </form>
+                                <button 
+                                    type="submit" 
+                                    disabled={state.submitting}
+                                    className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                    style={{ background: 'var(--gradient-primary)', boxShadow: '0 10px 40px rgba(6, 182, 212, 0.25)' }}>
+                                    {state.submitting ? (
+                                        <>
+                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                            {t.contact.form.sending || 'Sending...'}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send size={18} />
+                                            {t.contact.form.send}
+                                        </>
+                                    )}
+                                </button>
+                            </form>
+                        )}
                     </ScrollReveal>
                 </div>
 
