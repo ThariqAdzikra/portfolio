@@ -3,6 +3,7 @@ import { Github, ExternalLink, ChevronLeft, ChevronRight, Folder } from 'lucide-
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import Modal from '../../components/Modal/Modal';
 import TiltCard from '../../components/TiltCard/TiltCard';
+import SpotlightCard from '../../components/SpotlightCard/SpotlightCard';
 import { useLanguage } from '../../context/LanguageContext';
 
 const Projects = () => {
@@ -89,18 +90,20 @@ const Projects = () => {
                         {projects.map((project, index) => (
                             <ScrollReveal key={project.id} animation="fade-up" delay={Math.min(index + 1, 3)}>
                                 <TiltCard key={project.id} scale={1.02} maxRotation={5}>
-                                    <div 
-                                        onClick={() => setSelectedProject(project)}
+                                    <SpotlightCard 
                                         className="group w-[360px] h-[420px] flex-shrink-0 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl flex flex-col cursor-pointer"
-                                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
-                                        
+                                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
+                                        spotlightColor="rgba(6, 182, 212, 0.12)"
+                                        spotlightSize={350}
+                                    >
+                                        <div onClick={() => setSelectedProject(project)} className="flex flex-col h-full">
                                         {/* Image Area */}
-                                        <div className="h-[180px] relative overflow-hidden flex-shrink-0" style={{ background: 'var(--bg-tertiary)' }}>
+                                        <div className="h-[180px] relative overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ background: 'var(--bg-tertiary)' }}>
                                             {project.isRealProject ? (
                                                 <img 
                                                     src={project.images[0]} 
                                                     alt={project.title}
-                                                    className="w-full h-full object-cover object-top"
+                                                    className={`${project.tags.includes('Android Studio') ? 'h-full w-auto object-contain' : 'w-full h-full object-cover object-top'}`}
                                                 />
                                             ) : (
                                                 <div className="absolute inset-0 flex items-center justify-center text-7xl">
@@ -132,7 +135,8 @@ const Projects = () => {
                                                 ))}
                                             </div>
                                         </div>
-                                    </div>
+                                        </div>
+                                    </SpotlightCard>
                                 </TiltCard>
                             </ScrollReveal>
                         ))}
@@ -144,18 +148,24 @@ const Projects = () => {
                     {selectedProject && (
                         <div className="flex flex-col md:flex-row">
                             {/* Left - Image Gallery */}
-                            <div className="md:w-1/2 p-6" style={{ background: 'var(--bg-tertiary)' }}>
-                                {/* Main Preview with Scrollbar */}
-                                <div className="rounded-2xl overflow-hidden mb-4 max-h-[400px] overflow-y-auto"
-                                    style={{ background: 'var(--bg-card)', scrollbarWidth: 'thin', scrollbarColor: 'var(--accent-primary) var(--bg-card)' }}>
+                            <div className="md:w-1/2 p-6 flex flex-col" style={{ background: 'var(--bg-tertiary)' }}>
+                                {/* Main Preview - Better handling for portrait images */}
+                                <div 
+                                    className="rounded-2xl overflow-hidden mb-4 flex items-center justify-center"
+                                    style={{ 
+                                        background: 'var(--bg-card)', 
+                                        minHeight: '300px',
+                                        maxHeight: '450px',
+                                    }}>
                                     {selectedProject.isRealProject ? (
                                         <img 
                                             src={selectedProject.images[activeImage]} 
                                             alt={selectedProject.title}
-                                            className="w-full h-auto object-contain"
+                                            className="max-w-full max-h-[450px] object-contain"
+                                            style={{ margin: '0 auto' }}
                                         />
                                     ) : (
-                                        <div className="aspect-video flex items-center justify-center">
+                                        <div className="aspect-video flex items-center justify-center w-full">
                                             <span className="text-[120px]">{selectedProject.images[activeImage]}</span>
                                         </div>
                                     )}

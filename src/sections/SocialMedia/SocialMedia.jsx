@@ -13,18 +13,18 @@ const SocialMedia = () => {
     const { t } = useLanguage();
 
     const socials = [
-        { name: 'GitHub', icon: Github, url: '#', color: 'var(--text-primary)', desc: t.socialMedia.platforms.github },
-        { name: 'LinkedIn', icon: Linkedin, url: '#', color: '#0077b5', desc: t.socialMedia.platforms.linkedin },
-        { name: 'Instagram', icon: Instagram, url: '#', color: '#e4405f', desc: t.socialMedia.platforms.instagram },
-        { name: 'X', icon: XIcon, url: '#', color: 'var(--text-primary)', desc: t.socialMedia.platforms.x },
-        { name: 'YouTube', icon: Youtube, url: '#', color: '#ff0000', desc: t.socialMedia.platforms.youtube },
-        { name: 'Email', icon: Mail, url: '#', color: 'var(--accent-primary)', desc: t.socialMedia.platforms.email },
+        { name: 'GitHub', icon: Github, url: 'https://github.com/ThariqAdzikra', color: 'var(--text-primary)', desc: t.socialMedia.platforms.github },
+        { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/thariqadzikra/', color: '#0077b5', desc: t.socialMedia.platforms.linkedin },
+        { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/thrqdz_/', color: '#e4405f', desc: t.socialMedia.platforms.instagram },
+        { name: 'X', icon: XIcon, url: 'https://x.com/tyroid40', color: 'var(--text-primary)', desc: t.socialMedia.platforms.x },
+        { name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com/@thrqdz', color: '#ff0000', desc: t.socialMedia.platforms.youtube },
+        { name: 'Email', icon: Mail, url: 'https://mail.google.com/mail/?view=cm&to=adzthariq@gmail.com', color: 'var(--accent-primary)', desc: t.socialMedia.platforms.email },
     ];
 
     return (
         <section id="social" className="min-h-screen flex items-center py-20" style={{ background: 'var(--bg-section-2)' }}>
             <div className="w-full max-w-5xl mx-auto px-6">
-                <div className="grid lg:grid-cols-12 gap-12 items-center">
+                <div className="grid lg:grid-cols-12 gap-12 items-end">
                     {/* Right - Header */}
                     <ScrollReveal animation="fade-left" className="lg:col-span-5 lg:order-2">
                         <div className="lg:text-right">
@@ -47,21 +47,21 @@ const SocialMedia = () => {
                                 </span>
                             </h2>
 
-                            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                            <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
                                 {t.socialMedia.description}
                             </p>
 
                             {/* Stats */}
-                            <div className="mt-8 p-6 rounded-2xl lg:text-left" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
-                                <div className="flex items-center gap-8">
-                                    <div>
-                                        <div className="text-3xl font-black" style={{ color: 'var(--accent-primary)' }}>{t.socialMedia.stats.followers}</div>
-                                        <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.socialMedia.stats.followersLabel}</div>
+                            <div className="inline-flex px-4 py-3 rounded-2xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
+                                <div className="flex items-center gap-6">
+                                    <div className="text-center lg:text-left">
+                                        <div className="text-2xl font-black" style={{ color: 'var(--accent-primary)' }}>{t.socialMedia.stats.followers}</div>
+                                        <div className="text-xs" style={{ color: 'var(--text-muted)' }}>{t.socialMedia.stats.followersLabel}</div>
                                     </div>
-                                    <div className="w-px h-12" style={{ background: 'var(--border-color)' }} />
-                                    <div>
-                                        <div className="text-3xl font-black" style={{ color: 'var(--accent-secondary)' }}>{t.socialMedia.stats.posts}</div>
-                                        <div className="text-sm" style={{ color: 'var(--text-muted)' }}>{t.socialMedia.stats.postsLabel}</div>
+                                    <div className="w-px h-10" style={{ background: 'var(--border-color)' }} />
+                                    <div className="text-center lg:text-left">
+                                        <div className="text-2xl font-black" style={{ color: 'var(--accent-secondary)' }}>{t.socialMedia.stats.posts}</div>
+                                        <div className="text-xs" style={{ color: 'var(--text-muted)' }}>{t.socialMedia.stats.postsLabel}</div>
                                     </div>
                                 </div>
                             </div>
@@ -72,9 +72,12 @@ const SocialMedia = () => {
                     <div className="lg:col-span-7 lg:order-1 grid grid-cols-2 sm:grid-cols-3 gap-4">
                         {socials.map((social, index) => {
                             const Icon = social.icon;
+                            const isMailto = social.url.startsWith('mailto:');
                             return (
                                 <ScrollReveal key={index} animation="fade-up" delay={index + 1}>
-                                    <a href={social.url} target="_blank" rel="noopener noreferrer"
+                                    <a href={social.url} 
+                                        target={isMailto ? '_self' : '_blank'} 
+                                        rel={isMailto ? undefined : 'noopener noreferrer'}
                                         className="group h-[140px] p-5 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col items-center justify-center text-center"
                                         style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                                         
