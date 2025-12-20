@@ -84,9 +84,7 @@ Follow these steps to set up the project locally on your machine.
 *   **Location**: Indonesia
 *   **GitHub**: [@ThariqAdzikra](https://github.com/ThariqAdzikra)
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
