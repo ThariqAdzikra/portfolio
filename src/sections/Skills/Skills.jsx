@@ -49,7 +49,7 @@ const Skills = () => {
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent'
                                 }}>
-                                    24+
+                                    28+
                                 </div>
                                 <div className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{t.skills.techMastered}</div>
                             </div>

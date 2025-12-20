@@ -175,7 +175,7 @@ const Contact = () => {
                 {/* Footer */}
                 <div className="mt-20 pt-8 text-center" style={{ borderTop: '1px solid var(--border-color)' }}>
                     <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                        © 2024 <span style={{ color: 'var(--accent-primary)' }}>Thariq Adzikra</span> • {t.contact.footer.text}
+                        © 2025 <span style={{ color: 'var(--accent-primary)' }}>Thariq Adzikra</span> • {t.contact.footer.text}
                     </p>
                 </div>
             </div>

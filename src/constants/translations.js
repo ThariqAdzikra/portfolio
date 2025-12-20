@@ -384,7 +384,7 @@ export const translations = {
                 send: 'Kirim Pesan',
             },
             footer: {
-                text: 'Dibuat dengan ❤️ menggunakan React & Tailwind CSS'
+                text: 'Dibuat dengan ☕ menggunakan React & Tailwind CSS'
             }
         }
     },
@@ -772,7 +772,7 @@ export const translations = {
                 send: 'Send Message',
             },
             footer: {
-                text: 'Built with ❤️ using React & Tailwind CSS'
+                text: 'Built with ☕ using React & Tailwind CSS'
             }
         }
     }

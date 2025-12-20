@@ -8,8 +8,8 @@ const About = () => {
     const { t } = useLanguage();
 
     const stats = [
-        { icon: Code2, value: '10+', label: t.about.stats.projects },
-        { icon: Lightbulb, value: '3+', label: t.about.stats.years },
+        { icon: Code2, value: '11+', label: t.about.stats.projects },
+        { icon: Lightbulb, value: '2+', label: t.about.stats.years },
         { icon: Heart, value: '100%', label: t.about.stats.passion },
     ];
 
@@ -68,7 +68,7 @@ const About = () => {
                                                 background: 'var(--gradient-primary)',
                                                 WebkitBackgroundClip: 'text',
                                                 WebkitTextFillColor: 'transparent'
-                                            }}>3+</div>
+                                            }}>2+</div>
                                             <div className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>{t.about.yearsExp}</div>
                                         </div>
                                     </div>
