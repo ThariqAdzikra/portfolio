@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './BlobCursor.css';
 
 const BlobCursor = ({ 
-  blobColor = 'rgba(6, 182, 212, 0.3)',
+  blobColor = 'rgba(148, 163, 184, 0.25)',
   size = 40,
 }) => {
   const blobRef = useRef(null);

@@ -32,21 +32,45 @@ const TechCarousel = () => {
     // Get the fade color based on theme (matches --bg-secondary)
     const fadeColor = theme === 'dark' ? '#0f0f0f' : '#f5f5f5';
 
+    // Straight container styling (no tilt)
+    const carouselContainerStyle = {
+        background: 'var(--bg-secondary)',
+        overflow: 'hidden'
+    };
+
+    // CSS for grayscale/silver effect on logos - colored on hover with pause
+    const logoFilterStyle = `
+        .tech-carousel-straight img {
+            filter: grayscale(100%) brightness(1.2) contrast(0.9);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .tech-carousel-straight:hover img {
+            filter: grayscale(0%) brightness(1) contrast(1);
+            opacity: 1;
+        }
+    `;
+
     return (
-        <section className="py-12" style={{ background: 'var(--bg-secondary)' }}>
-            <LogoLoop
-                logos={technologies}
-                speed={80}
-                direction="left"
-                logoHeight={64}
-                gap={60}
-                hoverSpeed={20}
-                scaleOnHover
-                fadeOut
-                fadeOutColor={fadeColor}
-                ariaLabel="Technologies I work with"
-            />
-        </section>
+        <>
+            <style>{logoFilterStyle}</style>
+            <section className="py-10" style={carouselContainerStyle}>
+                <div className="tech-carousel-straight">
+                    <LogoLoop
+                        logos={technologies}
+                        speed={80}
+                        direction="left"
+                        logoHeight={56}
+                        gap={50}
+                        pauseOnHover={true}
+                        scaleOnHover
+                        fadeOut
+                        fadeOutColor={fadeColor}
+                        ariaLabel="Technologies I work with"
+                    />
+                </div>
+            </section>
+        </>
     );
 };
 

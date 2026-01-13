@@ -93,7 +93,7 @@ const Projects = () => {
                                     <SpotlightCard 
                                         className="group w-[360px] h-[420px] flex-shrink-0 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl flex flex-col cursor-pointer"
                                         style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
-                                        spotlightColor="rgba(6, 182, 212, 0.12)"
+                                        spotlightColor="rgba(148, 163, 184, 0.1)"
                                         spotlightSize={350}
                                     >
                                         <div onClick={() => setSelectedProject(project)} className="flex flex-col h-full">
@@ -113,7 +113,7 @@ const Projects = () => {
                                             
                                             {/* Hover Overlay */}
                                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
-                                                style={{ background: 'rgba(6, 182, 212, 0.9)' }}>
+                                                style={{ background: 'rgba(148, 163, 184, 0.85)' }}>
                                                 <span className="text-white font-bold">{t.projects.viewDetails}</span>
                                             </div>
                                         </div>

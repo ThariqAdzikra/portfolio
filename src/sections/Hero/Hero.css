@@ -1,0 +1,425 @@
+/* ========================
+   HERO SECTION
+   ======================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    animation: orbFloat1 20s ease-in-out infinite;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+    bottom: -50px;
+    left: -100px;
+    animation: orbFloat2 25s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 30px) scale(1.1); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.05); }
+}
+
+.grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+/* ========================
+   HERO CONTENT
+   ======================== */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+/* ========================
+   HERO GREETING - Subtle decorator text
+   ======================== */
+.hero-greeting {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+    margin-bottom: 0;
+}
+
+/* ========================
+   VIDEO MASKED TEXT - THARIQ (MAIN FOCUS - GIANT)
+   ======================== */
+.video-mask-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0 1rem;
+    line-height: 0.75;
+    min-height: 55vh;
+}
+
+.video-mask-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+}
+
+.mask-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* GIANT THARIQ TEXT - THE MAIN FOCUS */
+.video-masked-text {
+    position: relative;
+    z-index: 2;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(14rem, 42vw, 40rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.8;
+    color: transparent;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    mix-blend-mode: screen;
+    user-select: none;
+    margin: 0;
+    padding: 0.1em 0;
+    text-shadow: 0 0 80px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+/* Video masking effect using mix-blend-mode */
+.video-mask-wrapper::after {
+    content: 'THARIQ';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(14rem, 42vw, 40rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.8;
+    color: var(--bg-primary);
+    z-index: 3;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+[data-theme="light"] .video-mask-wrapper::after {
+    color: #ffffff;
+    mix-blend-mode: screen;
+}
+
+/* Fallback for browsers without good mix-blend support */
+@supports not (mix-blend-mode: screen) {
+    .video-masked-text {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    
+    .mask-video {
+        display: none;
+    }
+}
+
+/* ========================
+   HERO PORTRAIT OVERLAY (LARGE & PROMINENT)
+   ======================== */
+.hero-portrait {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    height: clamp(500px, 75vw, 1000px);
+    width: auto;
+    z-index: 10;
+    filter: grayscale(100%) contrast(1.35) brightness(1.1);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    animation: portraitReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.6s;
+    /* Fade out at bottom for smooth blend */
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 90%);
+    mask-image: linear-gradient(to bottom, black 40%, transparent 90%);
+}
+
+@keyframes portraitReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -25%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -35%) scale(1);
+    }
+}
+
+/* ========================
+   HERO SUBTITLE - Minimal decorator
+   ======================== */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.5s;
+    margin-top: 0;
+}
+
+/* ========================
+   HERO CTA - Clean minimal buttons
+   ======================== */
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.7s;
+}
+
+.btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 4px 20px rgba(148, 163, 184, 0.15);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(148, 163, 184, 0.25);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* ========================
+   SCROLL INDICATOR
+   ======================== */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1.2s;
+}
+
+.scroll-mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    position: relative;
+}
+
+.scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+    0%, 100% { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% { 
+        opacity: 0.3;
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+.scroll-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ========================
+   ANIMATIONS
+   ======================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 768px) {
+    .hero {
+        padding: 5rem 1.5rem 3rem;
+    }
+    
+    .hero-greeting {
+        font-size: 0.875rem;
+        letter-spacing: 3px;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+        letter-spacing: 2px;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-portrait {
+        height: clamp(280px, 60vw, 450px);
+        transform: translate(-50%, -30%);
+    }
+    
+    .video-masked-text,
+    .video-mask-wrapper::after {
+        font-size: clamp(7rem, 28vw, 16rem) !important;
+    }
+    
+    .video-mask-container {
+        min-height: 40vh;
+        margin: 0.25rem 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-masked-text,
+    .video-mask-wrapper::after {
+        font-size: clamp(5rem, 24vw, 10rem) !important;
+    }
+    
+    .video-mask-container {
+        min-height: 32vh;
+    }
+    
+    .hero-portrait {
+        height: clamp(200px, 50vw, 320px);
+    }
+}
