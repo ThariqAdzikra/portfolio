@@ -3,7 +3,7 @@ import { useRef, useState, useCallback } from 'react';
 const SpotlightCard = ({ 
   children, 
   className = '', 
-  spotlightColor = 'rgba(6, 182, 212, 0.15)',
+  spotlightColor = 'rgba(148, 163, 184, 0.12)',
   spotlightSize = 300,
   style = {},
   ...props 

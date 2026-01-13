@@ -386,6 +386,14 @@ export const translations = {
             footer: {
                 text: 'Dibuat dengan ☕ menggunakan React & Tailwind CSS'
             }
+        },
+        cta: {
+            badge: 'Mari Berkolaborasi',
+            title: 'Punya Proyek Menarik?',
+            titleHighlight: 'Ayo Wujudkan Bersama',
+            description: 'Saya selalu terbuka untuk peluang kolaborasi baru. Baik itu proyek web, mobile app, atau konsultasi UI/UX, mari diskusikan bagaimana kita bisa bekerja sama.',
+            button: 'Hubungi Saya',
+            email: 'atau email langsung ke'
         }
     },
     en: {
@@ -774,6 +782,14 @@ export const translations = {
             footer: {
                 text: 'Built with ☕ using React & Tailwind CSS'
             }
+        },
+        cta: {
+            badge: "Let's Collaborate",
+            title: 'Have an Exciting Project?',
+            titleHighlight: "Let's Build It Together",
+            description: "I'm always open to new collaboration opportunities. Whether it's a web project, mobile app, or UI/UX consulting, let's discuss how we can work together.",
+            button: 'Contact Me',
+            email: 'or email directly to'
         }
     }
 };

@@ -24,14 +24,14 @@ export default {
                     card: 'rgba(255, 255, 255, 0.95)',
                     'card-solid': '#ffffff',
                 },
-                // Accent colors for dark mode
+                // Accent colors for dark mode - Silver/Slate palette
                 accent: {
-                    cyan: '#06b6d4',
-                    teal: '#14b8a6',
-                    'cyan-light': '#22d3ee',
-                    'teal-light': '#2dd4bf',
-                    emerald: '#10b981',
-                    sky: '#38bdf8',
+                    primary: '#94a3b8',
+                    secondary: '#cbd5e1',
+                    light: '#e2e8f0',
+                    dark: '#64748b',
+                    muted: '#475569',
+                    soft: '#334155',
                 },
                 // Accent colors for light mode
                 warm: {

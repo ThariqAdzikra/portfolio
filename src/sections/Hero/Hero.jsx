@@ -11,15 +11,31 @@ const Hero = () => {
 
             <div className="container hero-content">
                 <div className="hero-text">
-                    <p className="hero-greeting">Hi, I'm</p>
-                    <h1 className="hero-name">
-                        <span className="gradient-text">Your Name</span>
-                    </h1>
-                    <h2 className="hero-title">Full Stack Developer</h2>
-                    <p className="hero-description">
-                        I craft beautiful, modern web experiences that merge creativity with functionality.
-                        Specialized in React, Node.js, and creating seamless user experiences.
-                    </p>
+                    <p className="hero-greeting">Hello, I'm</p>
+                    
+                    {/* Video Masked Text - THARIQ (MAIN FOCUS) */}
+                    <div className="video-mask-container">
+                        <div className="video-mask-wrapper">
+                            <video 
+                                className="mask-video"
+                                autoPlay 
+                                muted 
+                                loop 
+                                playsInline
+                            >
+                                <source src="/pasfoto/masking.mp4" type="video/mp4" />
+                            </video>
+                            <h1 className="video-masked-text">THARIQ</h1>
+                        </div>
+                        {/* Monochrome Portrait Overlay */}
+                        <img 
+                            src="/pasfoto/thariq2.png" 
+                            alt="Thariq Portrait" 
+                            className="hero-portrait"
+                        />
+                    </div>
+
+                    <p className="hero-subtitle">Full Stack Developer</p>
 
                     <div className="hero-cta">
                         <button className="btn btn-primary" onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>
@@ -31,20 +47,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div className="hero-stats">
-                    <div className="stat-item">
-                        <h3 className="stat-number gradient-text">3+</h3>
-                        <p className="stat-label">Years Experience</p>
-                    </div>
-                    <div className="stat-item">
-                        <h3 className="stat-number gradient-text">20+</h3>
-                        <p className="stat-label">Projects Completed</p>
-                    </div>
-                    <div className="stat-item">
-                        <h3 className="stat-number gradient-text">15+</h3>
-                        <p className="stat-label">Happy Clients</p>
-                    </div>
-                </div>
+
             </div>
 
             <div className="scroll-indicator">

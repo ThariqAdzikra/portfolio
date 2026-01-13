@@ -2,7 +2,7 @@ import { useRef, useEffect, useMemo } from 'react';
 
 const StarBorder = ({
   children,
-  color = '#06b6d4',
+  color = '#94a3b8',
   speed = 6,
   className = '',
   borderWidth = 2,

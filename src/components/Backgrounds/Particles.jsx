@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback } from 'react';
 
 const Particles = ({
   count = 50,
-  color = '#06b6d4',
+  color = '#94a3b8',
   minSize = 1,
   maxSize = 3,
   speed = 0.5,

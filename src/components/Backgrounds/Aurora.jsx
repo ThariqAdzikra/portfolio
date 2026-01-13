@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 
 const Aurora = ({ 
-  colorStops = ['#06b6d4', '#0891b2', '#22d3ee', '#67e8f9'],
+  colorStops = ['#64748b', '#94a3b8', '#cbd5e1', '#94a3b8'],
   speed = 0.5,
   blur = 80,
   opacity = 0.3,

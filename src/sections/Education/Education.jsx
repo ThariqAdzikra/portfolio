@@ -80,12 +80,12 @@ const Education = () => {
                                                 border: isExpanded ? '2px solid var(--accent-primary)' : '1px solid var(--border-color)',
                                             }}>
                                             
-                                            <div className={`flex gap-4 ${isLeft ? 'lg:flex-row-reverse text-right' : 'flex-row text-left'}`}>
+                                            <div className="flex gap-4 flex-row text-left">
 
 
                                                 {/* Info */}
                                                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                                    <div className={`flex items-center gap-2 mb-1 ${isLeft ? 'lg:justify-end' : ''}`}>
+                                                    <div className="flex items-center gap-2 mb-1">
                                                         <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--accent-primary)' }}>
                                                             {edu.level}
                                                         </span>
@@ -105,7 +105,7 @@ const Education = () => {
                                                         <p className="text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>{edu.major}</p>
                                                     )}
 
-                                                    <div className={`flex items-center gap-1.5 text-xs ${isLeft ? 'lg:justify-end' : ''}`} style={{ color: 'var(--text-muted)' }}>
+                                                    <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--text-muted)' }}>
                                                         <Calendar size={12} />
                                                         <span>{edu.period}</span>
                                                     </div>
@@ -125,7 +125,7 @@ const Education = () => {
                                                     borderRight: isLeft ? '2px solid var(--accent-primary)' : 'none',
                                                 }}>
                                                 
-                                                <div className={`flex flex-wrap items-center gap-3 mb-3 ${isLeft ? 'justify-end' : ''}`}>
+                                                <div className="flex flex-wrap items-center gap-3 mb-3">
                                                     <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium"
                                                         style={{ background: 'var(--bg-card)', color: 'var(--text-secondary)' }}>
                                                         <MapPin size={10} />
@@ -140,15 +140,15 @@ const Education = () => {
                                                     )}
                                                 </div>
 
-                                                <p className={`text-sm leading-relaxed mb-3 ${isLeft ? 'text-right' : ''}`} style={{ color: 'var(--text-secondary)' }}>
+                                                <p className="text-sm leading-relaxed mb-3 text-left" style={{ color: 'var(--text-secondary)' }}>
                                                     {edu.description}
                                                 </p>
 
                                                 {edu.highlights.length > 0 && (
-                                                    <div className={`flex flex-wrap gap-2 ${isLeft ? 'justify-end' : ''}`}>
+                                                    <div className="flex flex-wrap gap-2">
                                                         {edu.highlights.map((item, i) => (
                                                             <span key={i} className="px-2 py-1 rounded-md text-xs font-medium"
-                                                                style={{ background: 'rgba(6, 182, 212, 0.1)', color: 'var(--text-primary)' }}>
+                                                                style={{ background: 'rgba(148, 163, 184, 0.1)', color: 'var(--text-primary)' }}>
                                                                 {item}
                                                             </span>
                                                         ))}
